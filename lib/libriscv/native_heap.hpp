@@ -116,8 +116,15 @@ struct Arena
 	}
 
 	/// @brief Override the maximum number of slab slots (default: 4000).
+	/// Grows the slab storage to match: new_chunk() indexes the slab directly
+	/// up to this limit, so the vector must always hold m_max_chunks entries.
 	/// @param new_max New cap; must be set before the first allocation.
-	void set_max_chunks(unsigned new_max) { this->m_max_chunks = new_max; }
+	void set_max_chunks(unsigned new_max)
+	{
+		this->m_max_chunks = new_max;
+		if (m_chunk_slab.size() < new_max)
+			m_chunk_slab.resize(new_max);
+	}
 
 	/// @brief Total number of successful malloc() / seq_alloc_aligned() calls since construction.
 	unsigned allocation_counter()   const noexcept { return m_allocation_counter; }
