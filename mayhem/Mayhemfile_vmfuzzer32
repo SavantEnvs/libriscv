@@ -1,0 +1,8 @@
+project: savantenvs/libriscv
+target: vmfuzzer32
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/vmfuzzer32/testsuite
+cmds:
+  - cmd: /mayhem/vmfuzzer32 -handle_fpe=0
+    libfuzzer: true

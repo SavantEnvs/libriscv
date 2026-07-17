@@ -1,0 +1,8 @@
+project: savantenvs/libriscv
+target: elffuzzer64
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/elffuzzer64/testsuite
+cmds:
+  - cmd: /mayhem/elffuzzer64 -handle_fpe=0
+    libfuzzer: true
